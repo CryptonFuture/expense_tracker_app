@@ -18,7 +18,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/')
+MONGODB_URI = os.getenv('MONGODB_URI')
 JWT_SECRET = os.getenv('JWT_SECRET', 'fallback_secret')
 client = MongoClient(MONGODB_URI)
 db = client['expense-tracker']
@@ -55,7 +55,7 @@ def serialize(doc):
         del doc['password']
     return doc
 
-@app.route('/api/health')
+@app.route('/')
 def health():
     return jsonify({'status': 'OK', 'message': 'Python Flask API running'})
 
